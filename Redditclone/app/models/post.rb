@@ -21,5 +21,9 @@ class Post < ApplicationRecord
   
   belongs_to :sub
   
+  has_many :subs,
+  foreign_key: :post_id,
+  class_name: :PostSub
+  
   
 end

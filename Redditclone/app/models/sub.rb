@@ -19,4 +19,8 @@ class Sub < ApplicationRecord
    class_name: :User
    
    has_many :posts
+   
+  has_many :post_subs,
+  foreign_key: :sub_id,
+  class_name: :PostSub
 end

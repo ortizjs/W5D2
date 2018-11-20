@@ -1,8 +1,11 @@
 class PostsController < ApplicationController
   
   def new 
+    @subs = Sub.all
     @post = Post.new
   end
+  
+  
   
   def show
     @post = Post.find(params[:id])
@@ -12,8 +15,9 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.author_id = current_user.id
         
+    debugger
     if @post.save 
-      redirect_to sub_url(@post.sub_id) 
+      redirect_to posts_url 
     else 
       flash[:errors] = @post.errors.full_messages
       render :new
@@ -41,6 +45,6 @@ class PostsController < ApplicationController
   
   private 
   def post_params 
-    params.require(:post).permit(:title, :url, :content, :sub_id)
+    params.require(:post).permit(:title, :url, :content, sub_id:[])
   end
 end
