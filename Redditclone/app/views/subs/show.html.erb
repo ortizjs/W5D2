@@ -1,0 +1,30 @@
+Title:<%= @sub.title %>
+<br>
+Description:<%= @sub.description %>
+
+
+
+  
+<h2>All Posts</h2>
+<% @sub.posts.each do |post|%>
+
+Title:<%= post.title %>
+URL:<%= post.url %>
+Content:<%= post.content %>
+<br>
+<% end %>
+
+
+
+<h2>Add Post</h2>
+<form  action="<%= posts_url %>" method="post">
+  <input type="hidden" name="post[sub_id]" value="<%= @sub.id %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <label> Title
+  <input type="text" name="post[title]" value=""></label>
+  <label>URL
+  <input type="text" name="post[url]" value=""></label>
+  <label>Content
+  <input type="text" name="post[content]" value=""></label>
+  <input type="submit" name="" value="Create Post">
+</form>
