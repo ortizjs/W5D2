@@ -19,11 +19,17 @@ class Post < ApplicationRecord
     foreign_key: :author_id,
     class_name: :User
   
-  belongs_to :sub
+  # belongs_to :sub
+
+  
+  
+  has_many :post_subs,
+  foreign_key: :post_id,
+  class_name: :PostSub,
+  inverse_of: :post
   
   has_many :subs,
-  foreign_key: :post_id,
-  class_name: :PostSub
-  
+  through: :post_subs,
+  source: :sub
   
 end

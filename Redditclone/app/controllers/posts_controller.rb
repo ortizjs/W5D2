@@ -12,15 +12,16 @@ class PostsController < ApplicationController
   end 
   
   def create 
+    # debugger
     @post = Post.new(post_params)
     @post.author_id = current_user.id
-        
-    debugger
+        # debugger
+    
     if @post.save 
       redirect_to posts_url 
     else 
       flash[:errors] = @post.errors.full_messages
-      render :new
+      redirect_to new_post_url
     end
   end
   
@@ -31,6 +32,10 @@ class PostsController < ApplicationController
     else 
       flash[:errors] = @post.errors.full_messages
     end 
+  end
+  
+  def index 
+    @posts = Post.all
   end
   
   def edit 
@@ -45,6 +50,6 @@ class PostsController < ApplicationController
   
   private 
   def post_params 
-    params.require(:post).permit(:title, :url, :content, sub_id:[])
+    params.require(:post).permit(:title, :url, :content, sub_ids: [])
   end
 end
